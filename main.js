@@ -3,6 +3,7 @@ leftwristx=0;
 leftwristy=0;
 rightwristx=0;
 rightwristy=0;
+scoreleftwrist=0;
 function preload(){
     song=loadSound("music.mp3");
 }
@@ -19,6 +20,16 @@ function modelLoaded(){
 }
 function draw(){
     image(video,0,0,600,500);
+    fill("#FFA500");
+    stroke("#000000")
+if (scoreleftwrist>0.2){
+    circle (leftwristx,leftwristy,20);
+    Number_leftwristy=Number(leftwristy);
+    removedecimal=floor(Number_leftwristy);
+    volume=removedecimal/500;
+    document.getElementById("volume").innerHTML="Volume = "+volume;
+    song.setVolume(volume);
+}
 }
 function play(){
 song.play();
@@ -34,5 +45,7 @@ function gotPoses(results){
         rightwristy=results[0].pose.rightWrist.y;
         console.log("left wrist's x is "+leftwristx+"Left wrist's Y is "+leftwristy);
         console.log("Right wrist x is "+rightwristx+"Right wrist's Y is "+rightwristy);
+        scoreleftwrist=results[0].pose.keypoints[9].score;
+        console.log("The score of left wrist is = "+scoreleftwrist);
     }
 }
