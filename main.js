@@ -1,11 +1,15 @@
-Song="";
+Song1="";
+Song2="";
 leftwristx=0;
 leftwristy=0;
 rightwristx=0;
 rightwristy=0;
 scoreleftwrist=0;
+Song1_status = "";
+Song2_status = "";
 function preload(){
-    song=loadSound("music.mp3");
+    Song1=loadSound("tobu.mp3");
+    Song2= loadSound("believer.mp3")
 }
 function setup(){
     canvas=createCanvas(600,500);
@@ -21,14 +25,16 @@ function modelLoaded(){
 function draw(){
     image(video,0,0,600,500);
     fill("#FFA500");
-    stroke("#000000")
+    stroke("#000000");
+    Song1_status = Song1.isPlaying();
+    Song2_status = Song2.isPlaying();
 if (scoreleftwrist>0.2){
     circle (leftwristx,leftwristy,20);
-    Number_leftwristy=Number(leftwristy);
-    removedecimal=floor(Number_leftwristy);
-    volume=removedecimal/500;
-    document.getElementById("volume").innerHTML="Volume = "+volume;
-    song.setVolume(volume);
+Song2.stop();
+if (Song1_status == false) {
+    Song1.play();
+    document.getElementById("song").innerHTML = "Playing- tobu candyland song";
+}
 }
 }
 function play(){
